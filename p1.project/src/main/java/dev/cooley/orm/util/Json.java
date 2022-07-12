@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class Json {
 	
@@ -24,4 +26,25 @@ public class Json {
 		return objectMapper.treeToValue(node, classObj);
 	}
 	
+	public static JsonNode toJson(Object classObj) {
+		return objectMapper.valueToTree(classObj);
+	}
+	
+	public static String nodeToString(JsonNode node) throws JsonProcessingException {
+		return generateString(node, false);
+	}
+	
+	public static String nodeToFormatedString(JsonNode node) throws JsonProcessingException {
+		return generateString(node, true);
+	}
+	
+	private static String generateString(JsonNode node, boolean type) throws JsonProcessingException {
+		ObjectWriter objectWriter = objectMapper.writer();
+		
+		if ( type ) {
+			objectWriter.with(SerializationFeature.INDENT_OUTPUT);
+		}
+		return objectWriter.writeValueAsString(node);
+		
+	}
 }
