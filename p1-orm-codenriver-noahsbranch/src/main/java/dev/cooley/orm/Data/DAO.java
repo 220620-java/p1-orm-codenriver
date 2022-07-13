@@ -1,21 +1,16 @@
 package dev.cooley.orm.Data;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
-import dev.cavazos.utils.ConnectionUtil;
+import dev.cooley.orm.util.ConnectionUtil;
 
 public class DAO implements DataAccessObject{
-	private ConnectionUtil connUtil = ConnectionUtil.getConnectionUtil();
 	
 	@Override
-	public <O> Object getByID(int id) throws Exception {
-		ResultSet resulset = null;
+	public <O> Object getByID(int id) {
 		
-		try(Connection conn = getConnection();)
+		
 		return null;
 	}
 
