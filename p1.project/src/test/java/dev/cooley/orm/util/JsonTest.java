@@ -21,11 +21,28 @@ public class JsonTest {
 	}
 	
 	@Test
-	void toJson() throws JsonProcessingException, IllegalArgumentException {
+	void fromJson() throws JsonProcessingException, IllegalArgumentException {
 		
 		JsonNode node = Json.parse(testCase);
 		JsonTestObject testObj = Json.fromJson(node, JsonTestObject.class);
-		
 		assertEquals(testObj.getName(), "Dylan Cooley");
+	}
+	
+	@Test
+	void toJson() {
+		
+		JsonTestObject test = new JsonTestObject();
+		test.setName("Json test");
+		JsonNode node = Json.toJson(test);
+		assertEquals(node.get("name").asText(), "Json test");
+	}
+	
+	@Test
+	void stringTest() throws JsonProcessingException {
+		JsonTestObject test = new JsonTestObject();
+		test.setName("Json test");
+		JsonNode node = Json.toJson(test);
+		String string = Json.nodeToString(node);
+		assertEquals(string, "{\"name\":\"Json test\"}");
 	}
 }
