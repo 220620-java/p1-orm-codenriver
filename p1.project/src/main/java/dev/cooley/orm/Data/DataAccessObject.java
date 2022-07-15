@@ -1,12 +1,12 @@
 package dev.cooley.orm.Data;
 
-public interface DataAccessObject {
+public interface DataAccessObject <O> {
 	
-	<O> Object getByID(int id);
+	void updateObject(O obj, String table);
 	
-	void updateObject(Object obj);
+	void storeObject(O obj, String table);
 	
-	void storeObject(Object obj);
-	
-	void deleteObject(Object obj);
+	void deleteObject(O obj, String table);
+
+	Object getByField(String fieldKey, O obj, String table) throws IllegalArgumentException, IllegalAccessException;
 }

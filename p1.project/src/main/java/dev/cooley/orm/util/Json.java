@@ -9,9 +9,13 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class Json {
+	// TODO: Document methods
 	
 	private static ObjectMapper objectMapper = createObjectMapper();
 	
+	/**
+	 * 
+	 */
 	private static ObjectMapper createObjectMapper() {
 		objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
