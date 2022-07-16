@@ -55,7 +55,26 @@ public class DAO <O> implements DataAccessObject {
 
 	@Override
 	public void deleteObject(Object obj, String table) {
-		
+		try {
+			Connection conn = connUtil.openConnection();
+			Field[] fields = obj.getClass().getDeclaredFields();
+			String primaryKey = null;
+			int primaryKeyValue = 0;
+			for (Field field: fields) {
+				if (field.isAnnotationPresent(PrimaryKey.class)) {
+					primaryKey = field.getName();
+					primaryKeyValue = field.getInt(obj);
+				}
+			}
+			
+			String sql = "delete from "+ table +" where "+ primaryKey +"="+ primaryKeyValue +";";
+			PreparedStatement state = conn.prepareStatement(sql); 
+			state.execute();
+			
+		} catch (Exception e) {
+			logger.log(e.toString());
+			e.printStackTrace();
+		}
 		
 	}
 	

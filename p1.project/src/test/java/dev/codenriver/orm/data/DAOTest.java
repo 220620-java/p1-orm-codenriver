@@ -3,6 +3,7 @@ package dev.codenriver.orm.data;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,12 +32,14 @@ public class DAOTest {
 		assertEquals("Hey this is a test.", checkObj.getContents());
 	}
 	
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Test
 	void getAll() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Message testMessage = new Message();
+		Message checkObj = new Message(100);
 		DAO newdao = new DAO();
-		System.out.println(newdao.getTable(testMessage.getClass(), "test_db.messages"));
-		assertEquals(false, true);
+		ArrayList<Object> posts = newdao.getTable(testMessage.getClass(), "test_db.messages");
+		newdao.getByField("messageid", checkObj, "test_db.messages");
+		assertEquals(checkObj.toString(), ((Message) posts.get(0)).toString());
 	}
 } 
