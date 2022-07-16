@@ -2,11 +2,24 @@ package dev.cooley.orm.models;
 
 import java.util.Objects;
 
+import dev.codenriver.orm.annotations.BasicConstructor;
+import dev.codenriver.orm.annotations.PrimaryKey;
+
 public class Message {
+	
+	@PrimaryKey
 	private Integer messageid;
 	private String postdate;
 	private String contents;
 	private Integer likes;
+	
+	@BasicConstructor
+	public Message() {
+		this.messageid = 0;
+		this.postdate = "";
+		this.contents = "";
+		this.likes = 0;
+	}
 	
 	public Message(int id) {
 		this.messageid = id;
@@ -14,7 +27,7 @@ public class Message {
 		this.contents = "";
 		this.likes = 0;
 	}
-
+	
 	public Message(int id, String postdate, String contents , int likes) {
 		this.messageid = id;
 		this.postdate = postdate;
@@ -47,7 +60,7 @@ public class Message {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;
+			return true; 
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
@@ -58,7 +71,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + messageid + ", date=" + postdate + "Post= " + contents + ", likes=" + likes + "]";
+		return "Message [id=" + messageid + ", date=" + postdate + ", Post= " + contents + ", likes=" + likes + "]";
 		
 	}
 

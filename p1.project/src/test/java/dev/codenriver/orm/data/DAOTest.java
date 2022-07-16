@@ -1,6 +1,8 @@
 package dev.codenriver.orm.data;
 
-import static org.junit.jupiter.api.Assertions.assertEquals; 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.lang.reflect.InvocationTargetException;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +18,8 @@ public class DAOTest {
 		DAO newdao = new DAO();
 		newdao.getByField("messageid", testObj, "test_db.messages");
 		assertEquals(1815, testObj.getLikes());
-	}
-	
+	} 
+	 
 	@SuppressWarnings("rawtypes")
 	@Test
 	void update() throws IllegalArgumentException, IllegalAccessException {
@@ -27,5 +29,14 @@ public class DAOTest {
 		newdao.updateObject("messageid", 2, testObj, "test_db.messages");
 		newdao.getByField("messageid", checkObj, "test_db.messages");
 		assertEquals("Hey this is a test.", checkObj.getContents());
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Test
+	void getAll() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Message testMessage = new Message();
+		DAO newdao = new DAO();
+		System.out.println(newdao.getTable(testMessage.getClass(), "test_db.messages"));
+		assertEquals(false, true);
 	}
 } 
