@@ -1,33 +1,42 @@
 package dev.cooley.orm.Data;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field; 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import dev.cooley.orm.util.ConnectionUtil;
 import dev.cooley.orm.util.Logger;
 
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({"rawtypes"})
 public class DAO <O> implements DataAccessObject {
 	
 	private ConnectionUtil connUtil = ConnectionUtil.getConnectionUtil("database.properties");
 	private Logger logger = Logger.getLogger();
 
+	
 	@Override
-	public void updateObject(Object obj, String table) {
-		try {
+	public void updateObject(String primaryKey, int pKeyIndex, Object obj, String table) {
+		try { 
 			Connection conn = connUtil.openConnection();
 			
-			Object fieldValue;
+			
 			Class clasObj = obj.getClass();
 			Field[] objFields = clasObj.getDeclaredFields();
 			for (Field field: objFields) {
-			
-			String sql = "update "
-						+ table
-						+ " set " 
-						+ field.getName() ;
+				field.setAccessible(true);
+				if (field.getType().isPrimitive()) {
+					// update table set fieldName = 'fieldValue' where primaryKey=pKeyIndex;
+					String sql = "update "+ table +" set "+ field.getName() +" = "+ field.get(obj) +" where "+ primaryKey +" = "+ pKeyIndex +";";
+					PreparedStatement state = conn.prepareStatement(sql);
+					state.executeUpdate();
+				} else {
+					String sql = "update "+ table +" set "+ field.getName() +" = '"+ field.get(obj)  +"' where "+ primaryKey +"="+ pKeyIndex +";";
+					PreparedStatement state = conn.prepareStatement(sql);
+					state.executeUpdate();
+				}
 			}
 		} catch (Exception e) {
 			logger.log(e.toString());
@@ -36,7 +45,7 @@ public class DAO <O> implements DataAccessObject {
 
 	@Override
 	public void storeObject(Object obj, String table) {
-		String sql = "insert into messages (messageid, likes, postdate) values (default, 200, '2022-07-01');";
+		//String sql = "insert into messages (messageid, likes, postdate) values (default, 200, '2022-07-01');";
 		
 	}
 
@@ -49,14 +58,13 @@ public class DAO <O> implements DataAccessObject {
 	@Override
 	public Object getByField(String fieldKey, Object obj, String table) throws IllegalArgumentException, IllegalAccessException {
 		
-		Object fieldValue;
 		Class clsObj = obj.getClass();
 		Field[] objFields = clsObj.getDeclaredFields();
-		
+		Object fieldValue = null;
 		for (Field field: objFields) {
 			if (field.getName() == fieldKey) {
 				field.setAccessible(true);
-				fieldValue = (O) field.get(obj);
+				fieldValue = field.get(obj);
 				try {
 					
 					Connection conn = connUtil.openConnection();
@@ -86,6 +94,30 @@ public class DAO <O> implements DataAccessObject {
 		
 		return null;
 	}
-
-
+	
+	public ArrayList<Object> getTable(Object obj, String table) {
+		ArrayList<Object> allRows = new ArrayList<>(5);
+		
+		try {
+			Connection conn = connUtil.openConnection();
+			
+			String sql = "Select * from " + table;
+			PreparedStatement state = conn.prepareStatement(sql);
+			ResultSet resultSet = state.executeQuery(sql);
+			
+			while (resultSet.next()) {
+				Class clsObj = obj.getClass();
+				Constructor[] constructs = clsObj.getConstructors();
+				for (Constructor struct: constructs) {
+					Object newObj =  struct.newInstance();
+					
+				}
+				
+			}
+			
+			} catch(Exception e) {
+			
+		}
+		return null;
+	}
 }
