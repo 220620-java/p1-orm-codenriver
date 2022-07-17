@@ -49,7 +49,48 @@ public class DAO <O> implements DataAccessObject {
 
 	@Override
 	public void storeObject(Object obj, String table) {
-		//String sql = "insert into messages (messageid, likes, postdate) values (default, 200, '2022-07-01');";
+		// TODO:
+		String sql = "insert into " + table;
+		String columns = " (";
+		String values = "values (";
+		try {
+			Connection conn = connUtil.openConnection();
+			
+			conn.setAutoCommit(false);
+			
+			Class classObj = obj.getClass();
+			Field[] fields = classObj.getDeclaredFields();
+			int count = 0;
+			for (Field field: fields) {
+				field.setAccessible(true);
+				count += 1;
+				if (count < fields.length) {
+					columns += field.getName() + ", ";
+					if (field.getType().isPrimitive()) {
+						values += field.get(obj) + ", ";
+					} else {
+						values += "'"+field.get(obj)+"'" + ", ";
+					}
+				} else {
+					columns += field.getName() + ") "; 	
+					values += field.get(obj) + ");";
+				}
+			} 
+			sql += columns + values;
+			
+			PreparedStatement state = conn.prepareStatement(sql);
+			int rowsAffected = state.executeUpdate();
+			
+			if (rowsAffected == 1) {
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+			
+		} catch (Exception e) {
+			logger.log(e.toString());
+			e.printStackTrace();
+		}
 		
 	}
 

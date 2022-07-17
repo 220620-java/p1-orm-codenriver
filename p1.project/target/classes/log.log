@@ -1,0 +1,25 @@
+2022-07-16T12:26:38.111830100 --- org.postgresql.util.PSQLException: The column name $jacocoData was not found in this ResultSet.[Ljava.lang.StackTraceElement;@6428591a
+2022-07-16T12:26:38.502858700 --- org.postgresql.util.PSQLException: The column name $jacocoData was not found in this ResultSet.
+2022-07-16T12:26:39.085703400 --- org.postgresql.util.PSQLException: ERROR: syntax error at or near "$"
+  Position: 29
+2022-07-16T12:26:39.462078300 --- org.postgresql.util.PSQLException: The column name $jacocoData was not found in this ResultSet.
+2022-07-16T12:26:39.889109400 --- org.postgresql.util.PSQLException: The column name $jacocoData was not found in this ResultSet.
+2022-07-16T12:28:21.579233800 --- org.postgresql.util.PSQLException: The column name $jacocoData was not found in this ResultSet.[Ljava.lang.StackTraceElement;@79316f3a
+2022-07-16T12:28:22.028265600 --- org.postgresql.util.PSQLException: The column name $jacocoData was not found in this ResultSet.
+2022-07-16T12:28:22.607269400 --- org.postgresql.util.PSQLException: ERROR: syntax error at or near "$"
+  Position: 29
+2022-07-16T12:28:23.014247700 --- org.postgresql.util.PSQLException: The column name $jacocoData was not found in this ResultSet.
+2022-07-16T12:28:23.412275 --- org.postgresql.util.PSQLException: The column name $jacocoData was not found in this ResultSet.
+2022-07-17T01:35:55.271123900 --- java.lang.IllegalAccessException: class dev.cooley.orm.Data.DAO cannot access a member of class dev.cooley.orm.models.Message with modifiers "private"
+2022-07-17T01:36:26.995752900 --- org.postgresql.util.PSQLException: ERROR: syntax error at or near "likes"
+  Position: 60
+2022-07-17T01:38:13.193347800 --- org.postgresql.util.PSQLException: ERROR: syntax error at or near "likes"
+  Position: 61
+2022-07-17T01:44:51.655784100 --- org.postgresql.util.PSQLException: ERROR: syntax error at or near "likes"
+  Position: 61
+2022-07-17T01:45:03.665756400 --- org.postgresql.util.PSQLException: ERROR: syntax error at or near "contents"
+  Position: 51
+2022-07-17T01:45:11.781233100 --- org.postgresql.util.PSQLException: ERROR: relation "test_db.message" does not exist
+  Position: 13
+2022-07-17T01:45:25.569191200 --- org.postgresql.util.PSQLException: ERROR: relation "test_db.message" does not exist
+  Position: 13
