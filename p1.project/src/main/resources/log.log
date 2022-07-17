@@ -23,3 +23,13 @@
   Position: 13
 2022-07-17T01:45:25.569191200 --- org.postgresql.util.PSQLException: ERROR: relation "test_db.message" does not exist
   Position: 13
+2022-07-17T02:20:16.458005500 --- java.lang.IllegalAccessException: class dev.cooley.orm.Data.DAO cannot access a member of class dev.cooley.orm.models.Message with modifiers "private"
+2022-07-17T02:21:23.466773400 --- org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "messages_pkey"
+  Detail: Key (messageid)=(500) already exists.
+2022-07-17T02:21:23.780629600 --- java.lang.IllegalAccessException: class dev.cooley.orm.Data.DAO cannot access a member of class dev.cooley.orm.models.Message with modifiers "private"
+2022-07-17T02:22:57.149345400 --- org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "messages_pkey"
+  Detail: Key (messageid)=(500) already exists.
+2022-07-17T02:22:57.523760800 --- java.lang.IllegalAccessException: class dev.cooley.orm.Data.DAO cannot access a member of class dev.cooley.orm.models.Message with modifiers "private"
+2022-07-17T02:24:21.550453 --- org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "messages_pkey"
+  Detail: Key (messageid)=(500) already exists.
+2022-07-17T02:24:21.904440700 --- java.lang.IllegalAccessException: class dev.cooley.orm.Data.DAO cannot access a member of class dev.cooley.orm.models.Message with modifiers "private"

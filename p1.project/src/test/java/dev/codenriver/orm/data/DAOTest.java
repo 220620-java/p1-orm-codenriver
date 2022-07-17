@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import dev.cooley.orm.Data.DAO;
-import dev.cooley.orm.models.Message;
+import dev.codenriver.orm.models.Message;
 
 public class DAOTest {
 
@@ -42,4 +42,18 @@ public class DAOTest {
 		newdao.getByField("messageid", checkObj, "test_db.messages");
 		assertEquals(checkObj.toString(), ((Message) posts.get(0)).toString());
 	}
+	
+	@SuppressWarnings("rawtypes")
+	@Test
+	void deleteObject() throws IllegalArgumentException, IllegalAccessException {
+		DAO dao = new DAO();
+		Message checkObj = new Message(500, "11/11/2020", "This is a test entry.", 2);
+		dao.storeObject(checkObj, "test_db.messages");
+		dao.deleteObject(checkObj, "test_db.messages");
+		try {
+			((Message) dao.getByField("messageid", 500, "test_db.messages")).equals(null);
+		} catch (NullPointerException e) {
+			assertEquals(true, true);
+		}
+	} 
 } 

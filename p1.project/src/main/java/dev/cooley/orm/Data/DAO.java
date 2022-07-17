@@ -43,7 +43,6 @@ public class DAO <O> implements DataAccessObject {
 			}
 		} catch (Exception e) {
 			logger.log(e.toString());
-			System.out.println(e);
 		}
 	}
 
@@ -89,7 +88,6 @@ public class DAO <O> implements DataAccessObject {
 			
 		} catch (Exception e) {
 			logger.log(e.toString());
-			e.printStackTrace();
 		}
 		
 	}
@@ -114,7 +112,6 @@ public class DAO <O> implements DataAccessObject {
 			
 		} catch (Exception e) {
 			logger.log(e.toString());
-			e.printStackTrace();
 		}
 		
 	}
@@ -151,7 +148,6 @@ public class DAO <O> implements DataAccessObject {
 					
 					} catch(Exception e) {
 						logger.log(e.toString());
-						System.out.println(e);
 					}
 			}
 		}
@@ -193,7 +189,6 @@ public class DAO <O> implements DataAccessObject {
 			
 			} catch(Exception e) {
 				logger.log(e.toString() + e.getStackTrace());
-				e.printStackTrace();
 			}
 		return allRows;
 	}
